@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>Rental Stock Picker</title>
+</head>
+<body onload="requestCredentials()">
+    <!-- Temporary cover to require login -->
+    <div id="loginCover" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000;"></div>
+
+    <header>
+        <div class="banner">
+            <div class="header-image">
+                <img src="ide-logo.svg" alt="Company Logo">
+                <h1>Rental Stock Picker</h1>
+            </div>
+        </div>
+    </header>
+    <main id="passwordSection" style="display:none;">
+        <div class="search-container">
+            <select id="searchType" multiple size="3">
+                <option value="desc" selected>Search by Description</option>
+                <option value="grpCode">Search by GRPCode</option>
+            </select>
+            <input type="text" id="searchQuery" placeholder="Search...">
+
+            <select id="depotSelection">
+                <option value="ALL">All Depots</option>
+                <option value="CANN">Cannock</option>
+                <option value="LON">London</option>
+                <option value="SCOT">Scotland</option>
+                <option value="NE">North East</option>
+            </select>
+            <button onclick="fetchData()">Search</button>
+        </div>
+        
+                 
+        <div class="action-buttons">
+            <button onclick="confirmAndGo()">Finish</button>
+        </div>
+        <div class="content-container">
+            <div id="dataDisplay"><h2>Available Items:</h2></div>
+            <div id="selectedList">
+                <h2>Selected Items: <i class="fas fa-trash-alt" onclick="clearSelectedEntries()" style="cursor: pointer;"></i></h2>
+            </div>
+        </div>
+        <div id="availabilityModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">×</span>
+                <p id="modal-text">Availability</p>
+            </div>
+        </div>
+        <!-- Initial Choice Modal -->
+        <div id="choiceModal" class="modal" style="display: block;"> 
+            <div class="modal-content">
+                <h2>Are you arranging a delivery or collection?</h2>
+                <button onclick="setDelivery()">Delivery</button>
+                <button onclick="setCollection()">Collection</button>
+            </div>
+        </div>
+
+        <div id="depotModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('depotModal')">×</span>
+                <h2>Select a depot for collection:</h2>
+                <select id="depotSelectionModal">
+                    <option value="CANN">Cannock</option>
+                    <option value="LON">London</option>
+                    <option value="SCOT">Scotland</option>
+                    <option value="NE">North East</option>
+                </select>
+                <button onclick="confirmDepot()">Confirm</button>
+            </div>
+        </div>
+        
+        
+        <!-- The Modal -->
+        <div id="emailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="document.getElementById('emailModal').style.display='none'">×</span>
+                <form class="modal-form">
+                    <label for="userEmail">*Your Email:</label>
+                    <input type="email" id="userEmail" name="userEmail" required>
+        
+                    <label for="poNumber">*PO Number:</label>
+                    <input type="text" id="poNumber" name="poNumber" required>
+        
+                    <label for="notes">*Notes:</label>
+                    <textarea id="notes" name="notes"></textarea>
+                    
+                    <div id="collectionTimeContainer" style="display: none;"> <!-- Container for easier display management -->
+                        <label for="collectionTime">Projected Date and Time of Collection:</label>
+                        <input type="datetime-local" id="collectionTime">
+                    </div>
+
+                    <!-- Part of the modal form -->
+                    <label for="deliveryAddress" id="deliveryAddressLabel" style="display:none;">Delivery Address:</label>
+                    <input type="text" id="deliveryAddress" name="deliveryAddress" style="display:none;">
+
+        
+                    <button type="button" class="submit-button" onclick="submitEmailForm()">Send Email</button>
+                </form>
+            </div>
+    </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    padding-top: 100px; /* Ensures there is no overlap with the fixed header */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #0D2D6D;
+    color: #ffffff;
+    padding: 10px 20px;
+    z-index: 100; /* Keeps the header above other content */
+    display: flex;
+    justify-content: space-between; /* Aligns items on both ends */
+    align-items: center;
+}
+
+.header-image {
+    display: flex;
+    align-items: center;
+}
+
+.header-image img {
+    height: 50px; /* Adjust according to your logo */
+    width: auto;
+    margin-right: 20px; /* Provides spacing between logo and title */
+}
+
+h1 {
+    margin: 0; /* Removes default margin */
+    white-space: nowrap; /* Ensures the title stays in a single line */
+}
+
+
+#searchQuery {
+    flex-grow: 1; /* Allows the search input to fill the space within its container */
+    margin: 0 10px;
+    padding: 8px 10px;
+    border: 1px solid #ddd; /* Adds a subtle border */
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #004085;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 15px;
+    margin: 0 5px; /* Adds spacing between buttons */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+#grpCodeSelection, #searchQuery, #depotSelection {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: calc(33% - 22px); /* Adjust width to fit the container */
+}
+
+input[type="radio"] {
+    margin: 0 5px 0 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.actions button, #selectedList button {
+    padding: 5px 10px;
+    margin-top: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#selectedList button {
+    margin-left: 10px; /* Add some space between the list content and the remove button */
+}
+
+.content-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#dataDisplay, #selectedList {
+    flex: 1; 
+    margin: 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-y: auto; 
+    max-height: 600px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.entry, .group-entry {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.group-entry:last-child, .entry:last-child {
+    border-bottom: none;
+}
+
+.check-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#searchType {
+    height: auto; /* Adjust based on the content */
+    width: 150px; /* Set a fixed width */
+}
+
+
+.search-container {
+    position: fixed;
+    top: 90px; /* Adjust this value to fit below your header */
+    left: 20%; /* Center align the container */
+    transform: translateX(-50%); /* Shift it back by half of its own width */
+    width: 100%;
+    max-width: 600px; /* Maximum width of the search bar container */
+    background: #fff; /* Ensures contrast with the header */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 99; /* Ensures it's below the header but above other content */
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+    #dataDisplay, #selectedList {
+        margin: 10px 0;
+    }
+    .header-image {
+        flex-direction: column;
+    }
+    .search-container {
+        top: 160px; /* Increase top positioning on smaller screens if header layout changes */
+    }
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.modal-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-form input[type="email"],
+.modal-form input[type="text"],
+.modal-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 22px); /* Account for padding and border */
+}
+
+.modal-form button.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-form button.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-form textarea {
+    height: 100px; /* Fixed height for textarea */
+}
+
+.modal-form button:hover {
+    background-color: #004085;
+}
+
+.modal-form .submit-button {
+    width: 100%;
+    background-color: #28a745; /* Green background for submit */
+}
+
+.modal-form .submit-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.modal-form .cancel-button {
+    background-color: #dc3545; /* Red background for cancel */
+}
+
+.modal-form .cancel-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  /* Label adjustments for better UI */
+  #searchTypeLabel {
+    margin-left: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  /* Customize the checkbox style */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border-radius: 4px;
+    outline: 1px solid #1e5180
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+    background-color: rgb(135, 233, 212);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal {
+    display: none; /* Make sure this switches to block when modal is to be shown */
+    position: fixed; /* Keeps the modal on top of other content */
+    z-index: 1000; /* Higher than other elements */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+#selectedList h2 {
+    display: flex;
+    align-items: center; /* Aligns the text and icon vertically */
+    justify-content: space-between; /* Spreads content to both ends */
+}
+
+#selectedList i {
+    margin-left: 10px; /* Adds space between text and icon */
+    color: #007bff; /* Icon color */
+    transition: color 0.2s; /* Smooth color transition on hover */
+}
+
+#selectedList i:hover {
+    color: #0056b3; /* Darker shade on hover */
+}
